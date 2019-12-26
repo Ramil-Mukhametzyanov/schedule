@@ -82,6 +82,14 @@ function generate(){
    }
 
  }
+ show_d(indd,weekend);
+ return indd;
+}
+
+function show_d(indd,weekend){
+ var t = "";
+ 
+
  var t = dte.getDate()+"/"+(dte.getMonth()+1) +"/"+(dte.getYear()+1900) + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
 // var t = date + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
  if(plan[indd].days == 0)  t = "<i>" + t + "</i>";
@@ -90,7 +98,6 @@ function generate(){
  if(datematch(today, dte) == 1) t = "<div style=\"font-weight: bold;\">" + t + "</div>";
  if(dateCompare(today,dte) == 1) t = "";
  document.getElementById('l').innerHTML += t;
- return indd;
 }
 
 ccount = 1000;
