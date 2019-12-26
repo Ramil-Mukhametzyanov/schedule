@@ -76,8 +76,27 @@ function generate(){
     if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
     else if(!weekend && (plan[ii].quran == 0) && quran_need){}
     else{
+     var mm = 0;
+     for(var ll = 0 ; ll < last.length; ll++){
+      if(last[ll] == ii){
+       mm = 1;
+       break;
+      }
+     }
+     if(mm == 1){}
+     else{
+      if(last.length < frequency_max){
+       last[last.length] = ii;
+      }else{
+       for(kk = 0; kk < last.length - 1; kk++){
+        last[kk] = last[kk + 1];
+       }
+       last[last.length - 1] = ii;
+      }
+      console.log(last);
       indd = ii;
       minn = plan[ii].dif;
+     }
     }
    }
 
