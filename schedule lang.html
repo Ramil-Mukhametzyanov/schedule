@@ -5,6 +5,29 @@
 <div id = quran onclick="quran();">On weekend if no Quran translation</div>
 <div id=l></div>
 <script>
+var last = [];
+function datematch(d1,d2){
+if(d1.getYear() != d2.getYear()) return -1;
+if(d1.getMonth() != d2.getMonth()) return -1;
+if(d1.getDate() != d2.getDate()) return -1;
+return 1;
+}
+function dateCompare(d1,d2){
+if(d1.getYear() < d2.getYear()) return -1;
+if(d1.getYear() > d2.getYear()) return 1;
+if(d1.getMonth() < d2.getMonth()) return -1;
+if(d1.getMonth() > d2.getMonth()) return 1;
+if(d1.getDate() < d2.getDate()) return -1;
+if(d1.getDate() > d2.getDate()) return 1;
+return 0;
+}
+var today = new Date();
+var tQ = today.getDate() + "/" + today.getMonth() + "/" + today.getYear();
+tQ += "\n";
+tQ += dte.getDate() + "/" + dte.getMonth() + "/" + dte.getYear();
+tQ += "\n";
+tQ += datematch(today, dte);
+
 //<div id = new onclick="new();">New on weekend</div>
 var quran_need = 1;
 var new_on_weekend = 1;
@@ -53,18 +76,19 @@ function generate(){
     if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
     else if(!weekend && (plan[ii].quran == 0) && quran_need){}
     else{
-     indd = ii;
-     minn = plan[ii].dif;
+      indd = ii;
+      minn = plan[ii].dif;
     }
    }
 
  }
- var t = "";
  var t = dte.getDate()+"/"+(dte.getMonth()+1) +"/"+(dte.getYear()+1900) + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
 // var t = date + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
  if(plan[indd].days == 0)  t = "<i>" + t + "</i>";
  if(weekend) t = "<div style=\"background: #EEEEEE;\">" + t + "</div>";
  if(plan[indd].quran == 0) t = "<div style=\"color: red;\">" + t + "</div>";
+ if(datematch(today, dte) == 1) t = "<div style=\"font-weight: bold;\">" + t + "</div>";
+ if(dateCompare(today,dte) == 1) t = "";
  document.getElementById('l').innerHTML += t;
  return indd;
 }
