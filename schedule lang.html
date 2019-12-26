@@ -1,0 +1,82 @@
+<head>
+<script src="lang"></script>
+</head>
+<body>
+<div id = quran onclick="quran();">On weekend if no Quran translation</div>
+<div id=l></div>
+<script>
+//<div id = new onclick="new();">New on weekend</div>
+var quran_need = 1;
+var new_on_weekend = 1;
+function init(){
+ var total = 0
+;
+ for(var ii = 0; ii < plan.length; ii++){
+
+  total += eval(plan[ii].pop);
+
+  if(plan[ii].days == '') plan[ii].days = 0;
+ }
+ for(var ii = 0; ii < plan.length; ii++){
+
+  plan[ii].rate = eval(plan[ii].pop)/total;
+
+ }
+}
+init();
+function generate(){
+ var progresss = 0;
+ var weekend = (dte.getDay() == 0 || dte.getDay() == 6);
+ if(weekend == false){
+  for(var j = 0; j < weekends.length; j++){
+   if(dte - new Date(weekends[j]) == 0) weekend = true;
+  }
+ }
+ for(var ii = 0; ii < plan.length; ii++){
+
+  progresss += eval(plan[ii].days);
+ }
+ for(var ii = 0; ii < plan.length; ii++){
+
+  plan[ii].pro = eval(plan[ii].days)/progresss;
+ }
+ for(var ii = 0; ii < plan.length; ii++){
+
+  plan[ii].dif = plan[ii].rate - plan[ii].pro;
+
+ }
+ var indd = 0; var minn = plan[indd].dif;
+ for(var ii = 0; ii < plan.length; ii++){
+
+   if(plan[ii].dif < 0) {}
+   else if(plan[ii].dif > minn){
+    if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
+    else if(!weekend && (plan[ii].quran == 0) && quran_need){}
+    else{
+     indd = ii;
+     minn = plan[ii].dif;
+    }
+   }
+
+ }
+ var t = "";
+ var t = dte.getDate()+"/"+(dte.getMonth()+1) +"/"+(dte.getYear()+1900) + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
+// var t = date + " [" + indd + "]:" + plan[indd].name + "   " +  (eval(plan[indd].days)+1) + "<br>";
+ if(plan[indd].days == 0)  t = "<i>" + t + "</i>";
+ if(weekend) t = "<div style=\"background: #EEEEEE;\">" + t + "</div>";
+ if(plan[indd].quran == 0) t = "<div style=\"color: red;\">" + t + "</div>";
+ document.getElementById('l').innerHTML += t;
+ return indd;
+}
+
+ccount = 1000;
+do{
+ var indd = generate();
+ plan[indd].days++;
+var newdte = new Date(dte.getTime() + (24 * 60 * 60 * 1000));
+
+ dte=newdte;
+ ccount--;
+}while(ccount >= 0);
+</script>
+</body>
