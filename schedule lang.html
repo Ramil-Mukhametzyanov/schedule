@@ -5,7 +5,7 @@
 <div id = quran onclick="quran();">On weekend if no Quran translation</div>
 <div id=l></div>
 <script>
-frequency_max = 7;
+frequency_max = 0;
 var last = [];
 function datematch(d1,d2){
 if(d1.getYear() != d2.getYear()) return -1;
@@ -53,7 +53,7 @@ function addd(ii){
        last[last.length - 1] = ii;
       }
 }
-functio is_in(ii){
+function is_in(ii){
      var mm = 0;
      for(var ll = 0 ; ll < last.length; ll++){
       if(last[ll] == ii){
@@ -85,26 +85,20 @@ function generate(){
   plan[ii].dif = plan[ii].rate - plan[ii].pro;
 
  }
- var indd = 0; var minn = plan[indd].dif;
+ var indd = -1; var minn = -1;
  for(var ii = 0; ii < plan.length; ii++){
-
-   if(plan[ii].dif < 0) {}
-   else if(plan[ii].dif > minn){
-    if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
-    else if(!weekend && (plan[ii].quran == 0) && quran_need){}
-    else{
-     var mm = is_in(ii);
-     if(mm == 1){}
-     else{
-      addd(ii);
-      console.log(last);
-      indd = ii;
-      minn = plan[ii].dif;
-     }
-    }
+  if(plan[ii].dif > minn){
+   if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
+   else if(!weekend && (plan[ii].quran == 0) && quran_need){}
+   else if(is_in(ii) == 1){}
+   else{
+    indd = ii;
+    minn = plan[ii].dif;
    }
-
+  }
  }
+ addd(indd);
+// console.log(last);
  show_d(indd,weekend);
  return indd;
 }
