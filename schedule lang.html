@@ -53,6 +53,16 @@ function addd(ii){
        last[last.length - 1] = ii;
       }
 }
+functio is_in(ii){
+     var mm = 0;
+     for(var ll = 0 ; ll < last.length; ll++){
+      if(last[ll] == ii){
+       mm = 1;
+       break;
+      }
+     }
+  return mm;
+}
 
 function generate(){
  var progresss = 0;
@@ -83,13 +93,7 @@ function generate(){
     if(!weekend && (plan[ii].days == 0) && new_on_weekend){}
     else if(!weekend && (plan[ii].quran == 0) && quran_need){}
     else{
-     var mm = 0;
-     for(var ll = 0 ; ll < last.length; ll++){
-      if(last[ll] == ii){
-       mm = 1;
-       break;
-      }
-     }
+     var mm = is_in(ii);
      if(mm == 1){}
      else{
       addd(ii);
